@@ -12,19 +12,19 @@
 <body>
     <div id="container">
         <div id="top-bar">
-            <h1>Welcome, {{session.first_name}}</h1>
+            <h1>Welcome, {{student.first_name}}</h1>
             <button> <a href="/clear_session">Logout</a> </button>
         </div>
         <div id="main-content">
             <div class="left-main">
                 <!-- possibly another div here to hold user profile and edit button -->
                 <h3>User Profile</h3>
-                <p>Name: (DATA HERE)</p>
-                <p> Email: (DATA HERE)</p>
-                <p>Current Grade: (DATA HERE)</p>
+                <p>Name: {{student.first_name}} {{student.last_name}}</p>
+                <p> Email: {{student.email}}</p>
+                <p>Current Grade: {{student.current_grade}}</p>
                 <!-- GPA YES/NO? -->
                 <p>GPA: (DATA HERE)</p>
-                <a href="/edit_profile">Edit Profile</a>
+                <a href="/edit_profile/{{student.id}}">Edit Profile</a>
             </div>
             <div class="right-main">
                 <h3>Classes</h3>

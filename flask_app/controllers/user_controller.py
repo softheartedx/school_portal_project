@@ -15,7 +15,7 @@ def success():
     if 'user_id' not in session:
         flash("You must log in to access this page!")
         return redirect('/')
-    return render_template('student_dashboard.html')
+    return render_template('student_dashboard.html', student=User.get_user_by_id(session['user_id']))
 
 @app.route('/register', methods=['post'])
 def register():
@@ -24,11 +24,11 @@ def register():
     # if User.get_user_by_email(request.form)==True:
     #     flash('This email address is already in use!')
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
-    print(pw_hash)
     data = {
         'first_name': request.form['first_name'],
         'last_name': request.form['last_name'],
         'current_grade': request.form['current_grade'],
+        'role': request.form['role'],
         'email': request.form['email'],
         'password': request.form['password']
     }
@@ -55,7 +55,7 @@ def clear_session():
     return redirect('/')
 
 
-@app.route('/edit_profile')
-def edit_profile():
-    return render_template('edit_profile.html')
+@app.route('/edit_profile/<int:id>')
+def edit_profile(id):
+    return render_template('edit_profile.html', one_student=User.get_user_by_id(id))
 
