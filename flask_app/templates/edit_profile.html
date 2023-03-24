@@ -12,43 +12,49 @@
 <body>
     <div id="container">
         <div class="registration">
-            <form action="/register" method="post">
+            <form action="/edit_student_profile/{{one_student.id}}" method="post">
                 <h1>Update Profile</h1>
                 {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <p style="color: rgb(170, 0, 0) ;">{{message}}</p>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
+                {% if messages %}
+                {% for message in messages %}
+                <p style="color: rgb(170, 0, 0) ;">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
                 <div>
                     <label for="first_name">First Name:</label>
                     <br>
-                    <input type="text" name="first_name" placeholder="{{one_student.first_name}}">
+                    <input type="text" name="first_name" value="{{one_student.first_name}}">
                 </div>
 
                 <div>
                     <label for="last_name">Last Name:</label>
                     <br>
-                    <input type="text" name="last_name" placeholder="{{one_student.last_name}}">
+                    <input type="text" name="last_name" value="{{one_student.last_name}}">
                 </div>
 
                 <div>
                     <label for="last_name">Current Grade:</label>
                     <br>
-                    <input type="text" name="current_grade" placeholder="{{one_student.current_grade}}">
+                    <input type="text" name="current_grade" value="{{one_student.current_grade}}">
+                </div>
+
+                <div>
+                    <label for="role">Role:</label>
+                    <br>
+                    <input readonly="readonly" type="text" name="role" value="Student">
                 </div>
 
                 <div>
                     <label for="email">Email:</label>
                     <br>
-                    <input type="text" name="email" placeholder="{{one_student.email}}">
+                    <input type="text" name="email" value="{{one_student.email}}">
                 </div>
 
                 <div>
                     <label for="password">Password</label>
                     <br>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" value="Password">
                 </div>
 
                 <div>

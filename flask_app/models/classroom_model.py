@@ -30,4 +30,9 @@ class Class:
         one_class = cls(result[0])
         return one_class
     
+    @classmethod
+    def get_all_classes(cls):
+        query = 'SELECT * FROM classes'
+        return connectToMySQL(db).query_db(query)
+    
     #NEED JOIN QUERIES

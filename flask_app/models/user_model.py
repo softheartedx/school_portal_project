@@ -38,6 +38,12 @@ class User:
         result = connectToMySQL(db).query_db(query, {'id': id})
         return cls(result[0])
     
+
+    @classmethod
+    def update_student(cls, data, id):
+        query = f'UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, current_grade=%(current_grade)s, role=%(role)s, email=%(email)s, password=%(password)s WHERE id={id}'
+        return connectToMySQL(db).query_db(query, data)
+    
     #NEED JOIN QUERIES
 
     @staticmethod

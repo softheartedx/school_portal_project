@@ -30,7 +30,7 @@ def register():
         'current_grade': request.form['current_grade'],
         'role': request.form['role'],
         'email': request.form['email'],
-        'password': request.form['password']
+        'password': pw_hash
     }
     user_id = User.save(data)
     session['first_name'] = request.form['first_name']
@@ -55,7 +55,14 @@ def clear_session():
     return redirect('/')
 
 
-@app.route('/edit_profile/<int:id>')
-def edit_profile(id):
-    return render_template('edit_profile.html', one_student=User.get_user_by_id(id))
+@app.route('/show_student_profile/<int:student_id>')
+def edit_profile(student_id):
+    return render_template('edit_profile.html', one_student=User.get_user_by_id(student_id))
 
+@app.route('/edit_student_profile/<int:student_id>', methods=['POST'])
+def update_profile(student_id):
+    if not User.user_validator(request.form):
+        return redirect(f'/show_student_profile/{student_id}')
+    User.update_student(request.form, student_id)
+    print(request.form)
+    return redirect('/success')
