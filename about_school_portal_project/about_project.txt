@@ -1,0 +1,108 @@
+--School Portal Project--
+About:
+    This app allows students and teachers of this school to make an account, and be sent to a dashboard that shows their information as well as some functionailty depending on what kind of account they have(student/teacher).
+    
+    As a students, you can edit your profile and view the classes that you are enrolled in. Viewing a class will show you your grade in the class and any class information. In student dashboard you can also enroll in more available classes.
+
+    As a teacher, you can edit your profile and view the classes that you are responsible for. View a class you are responsible for, you can edit class and assign grades to each student attending your class. In the teacher dashboard you can view other classes and created new classes.
+
+    Below is a rough outline of each page and their functionailty. More detail on wireframe.
+
+student register: user CRUD
+    first Name
+    last Name
+    grade number
+    email
+    password
+
+teacher register: user CRUD
+    first name
+    last name
+    staff position
+    email
+    password
+
+only teachers can make a classroom(create/edit):
+    name
+    description
+    location
+    lecture dates
+    teacher name
+    roster
+    teacher comments
+    post comments button
+
+students can only join classroom(view/join):
+    name
+    description
+    location
+    lecture dates
+    teacher name
+    roster
+    teacher comments
+    enroll button
+
+student dashboard(2 cols):
+    user profile:
+        first name
+        last name
+        email
+        number grade
+    class schedule:
+        list classes attended/attending:
+            list class information
+                class name + grade on table
+            onclick redirect to class page:
+                class name
+                class description
+                show grade in class
+                see roster
+                see posts
+        join class button to redirect to join another class:
+            lists classes available with class information
+            can not join class already enrolled in(make disabled or not show in list)
+
+teacher dashboard(2 cols):
+    user profile:
+        first name
+        last name
+        email
+        list of class responsible for:
+            onclick redirect to class page:
+                shows students in class:
+                    edit students(give grade)
+                    drop students(optional)
+                edit class:
+                    change anything about class
+                    post comments/annoucements
+                        will open an overlay form to create post
+                        also have the functionailty to edit posts
+    classes:
+        list classes available:
+            onclick redirect to class page:
+                class name
+                class description
+                location
+                lecture dates(should consider created date/start date to prevent having to store multiple dates)
+                teacher of class
+                roster
+        create class: 
+            class name
+            class description
+            location
+            lecture dates(should consider created date to prevent having to store multiple dates)
+            teacher name(already filled with teacher session user to prevent making a class for another teacher)
+
+all pages:
+    logout button
+
+DB tables:
+    user(use role index to specify user)
+        first name
+        last name
+        grade number
+        staff position
+        email
+        password
+    classrooms
+    posts(optional)
