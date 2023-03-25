@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+    <header class="top">
+        <h1>Welcome {{user.name}}</h1>
+        <button class="logout" formaction="/logout">Log out</button>
+    </header>
+    <div class="col">
+        <div>
+            <title>User Profile</title>
+            <p>Name: {{user.first_name}} {{user.last_name}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Staff position: {{user.staff_position}}</p>
+        </div>
+        <div>
+            <title>My classes</title>
+            {% for class in classes%}
+                <!-- have links to classes here -->
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col">
+        <title>Other Classes</title>
+        <table>
+            <thead>
+                <tr>
+                    <th>Available Classes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- add table data here -->
+                {% for class in all_classes%}
+                    <tr>
+                        <td>class.name</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/to_add_class">Add a class</a>
+    </div>
+</body>
+</html>

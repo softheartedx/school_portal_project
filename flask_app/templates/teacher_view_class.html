@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Dashboard</title>
+</head>
+<body>
+    <header class="top">
+        <h1>{{class.name}}</h1><a href="/edit_class">edit class</a>
+        <a href="/dashboard">back to dashboard</a> | <button class="logout" formaction="/logout">Log out</button>
+    </header>
+    <div class="col">
+        <h2>Description</h2>
+        Location: {{class.location}} | Date: {{class.start_date}}
+        <p>
+            {{class.description}}
+        </p>
+    </div>
+    <div class="col">
+        Teacher: {{class.teacher}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Roster</th>
+                    <th>Grade:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in class.students%}
+                    <tr>
+                        <td>
+                            {{student.name}}
+                        </td>
+                        <td>
+                            <!-- figure out how to submit form for speciic student -->
+                            <form action=""></form>
+                            <select name="grade" id="grade">
+                                <option value="A+" {% if grade == "A+"%} selected {% endif %}>A+</option>
+                                <option value="A" {% if grade == "A"%} selected {% endif %}>A</option>
+                                <option value="A-" {% if grade == "A-"%} selected {% endif %}>A-</option>
+                                <option value="B+" {% if grade == "B+"%} selected {% endif %}>B+</option>
+                                <option value="B" {% if grade == "B"%} selected {% endif %}>B</option>
+                                <option value="B-" {% if grade == "B-"%} selected {% endif %}>B-</option>
+                                <option value="C+" {% if grade == "C+"%} selected {% endif %}>C+</option>
+                                <option value="C" {% if grade == "C"%} selected {% endif %}>C</option>
+                                <option value="C-" {% if grade == "C-"%} selected {% endif %}>C-</option>
+                                <option value="D+" {% if grade == "D+"%} selected {% endif %}>D+</option>
+                                <option value="D" {% if grade == "D"%} selected {% endif %}>D</option>
+                                <option value="D-" {% if grade == "D-"%} selected {% endif %}>D-</option>
+                                <option value="F" {% if grade == "F"%} selected {% endif %}>F</option>
+                            </select>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button>Update</button>
+    </div>
+</body>
+</html>
