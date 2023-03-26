@@ -24,7 +24,9 @@
                     <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
                     <p>Email: {{teacher.email}}</p>
                     <p>Staff position: {{teacher.role}}</p>
+                    <button class="btn btn-sm"><a href="/show_student_profile/{{teacher.id}}">Edit Profile</a></button>
                 </div>
+
                 <div>
                     <title>My classes</title>
                     {% for class in classes%}
