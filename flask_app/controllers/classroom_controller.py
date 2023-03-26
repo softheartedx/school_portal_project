@@ -11,5 +11,6 @@ def show_one_class(class_id):
     data = {
         'id': class_id
     }
-    return render_template('one_class.html', one_class = Class.get_one_class(data))
+    one_class = Class.get_one_class(data)
+    return render_template('student_view_class.html', one_class = one_class)
 
