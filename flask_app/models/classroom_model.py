@@ -1,5 +1,6 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.enrollment_model import Enrollment
 import pprint
 
 db = 'student_portal'
@@ -11,6 +12,7 @@ class Class:
         self.description = data['description']
         self.location = data['location']
         self.start_date = data['start_date']
+        self.students = []
         self.teacher = None
 
     @classmethod
@@ -34,5 +36,6 @@ class Class:
     def get_all_classes(cls):
         query = 'SELECT * FROM classes'
         return connectToMySQL(db).query_db(query)
+    
     
     #NEED JOIN QUERIES

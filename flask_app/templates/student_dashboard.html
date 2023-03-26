@@ -12,7 +12,7 @@
 <body>
     <div id="container">
         <div id="top-bar">
-            <h1>Welcome, {{student.first_name}}</h1>
+            <h1>Welcome, {{student.first_name}} {{student.last_name}}</h1>
             <button> <a href="/clear_session">Logout</a> </button>
         </div>
         <div id="main-content">
@@ -22,25 +22,16 @@
                 <p>Name: {{student.first_name}} {{student.last_name}}</p>
                 <p> Email: {{student.email}}</p>
                 <p>Current Grade: {{student.current_grade}}</p>
-                <!-- GPA YES/NO? -->
-                <p>GPA: (DATA HERE)</p>
-                <a href="/show_student_profile/{{student.id}}">Edit Profile</a>
+                <button><a href="/show_student_profile/{{student.id}}">Edit Profile</a></button>
             </div>
             <div class="right-main">
                 <h3>Classes</h3>
-                <table>
-                    <thead>
-                        <th>Class Name</th>
-                        <th>Grade</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>(DATA HERE)</td>
-                            <td>(DATA HERE)</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="/all_classes">Enroll in a Class</a>
+                {% for class in one_student.classes %}
+                    <p>{{class.class_name}}</p>
+                {% endfor %}
+
+
+                <button><a href="/all_classes">Enroll in a Class</a></button>
             </div>
         </div>
     </div>

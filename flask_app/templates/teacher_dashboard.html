@@ -8,15 +8,15 @@
 </head>
 <body>
     <header class="top">
-        <h1>Welcome {{user.name}}</h1>
-        <button class="logout" formaction="/logout">Log out</button>
+        <h1>Welcome {{teacher.first_name}} {{teacher.last_name}}</h1>
+        <button class="logout" formaction="/logout"> <a href="/clear_session"> Log out </a></button>
     </header>
     <div class="col">
         <div>
             <title>User Profile</title>
-            <p>Name: {{user.first_name}} {{user.last_name}}</p>
-            <p>Email: {{user.email}}</p>
-            <p>Staff position: {{user.staff_position}}</p>
+            <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
+            <p>Email: {{teacher.email}}</p>
+            <p>Staff position: {{teacher.role}}</p>
         </div>
         <div>
             <title>My classes</title>

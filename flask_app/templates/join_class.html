@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Enrollment List</title>
+</head>
+
+<body>
+    <h1>All Classes</h1>
+    {% for class in all_classes%}
+    <div>
+        <hr>
+        <h3>{{class.class_name}}</h3>
+        <p>{{class.location}}</p>
+        <p> {{class.start_date}}</p>
+        <p>{{class.description}}</p>
+        <form action="/enroll_in_class/{{class.id}}" method="post">
+            <button type="submit">Enroll</button>
+        </form>
+    </div>
+    {% endfor %}
+    <hr>
+    <a href="/success">Back to dashboard</a>
+</body>
+
+</html>
