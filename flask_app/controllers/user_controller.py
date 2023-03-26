@@ -20,7 +20,7 @@ def success():
         'id': session['user_id']
     }
     one_student = User.show_student_with_classes(data)
-    return render_template('student_dashboard.html', student=User.get_user_by_id(session['user_id']), one_student = one_student)
+    return render_template('student_dashboard.html', student=User.get_user_by_id(session['user_id']), one_student=one_student)
 
 @app.route('/success/teacher')
 def success_teacher():

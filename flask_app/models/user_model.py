@@ -50,11 +50,10 @@ class User:
     @classmethod
     def show_student_with_classes(cls, id):
         query = '''SELECT * FROM users
-                JOIN enrollment on enrollment.student_id = users.id
+                LEFT JOIN enrollment on enrollment.student_id = users.id
                 LEFT JOIN classes on enrollment.class_id = classes.id WHERE users.id =%(id)s'''
         results = connectToMySQL(db).query_db(query, id)
         one_student = cls(results[0])
-        print(one_student) #prints immutable dict
         for row_in_db in results:
             enrollment_data = {
                 'student_id': row_in_db['student_id'],
