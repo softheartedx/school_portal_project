@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css'
+        integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <link rel="stylesheet" href="../static/style/styles.css">
     <title>Teacher Dashboard</title>
 </head>
+
 <body>
-    <header class="top">
-        <h1>Welcome {{teacher.first_name}} {{teacher.last_name}}</h1>
-        <button class="logout" formaction="/logout"> <a href="/clear_session"> Log out </a></button>
-    </header>
-    <div class="col">
-        <div>
-            <title>User Profile</title>
-            <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
-            <p>Email: {{teacher.email}}</p>
-            <p>Staff position: {{teacher.role}}</p>
+    <div class="container dashboard">
+        <div id="top-bar">
+            <h1>Welcome {{teacher.first_name}} {{teacher.last_name}}</h1>
+            <button class="logout btn btn-sm" formaction="/logout"> <a href="/clear_session"> Log out </a></button>
         </div>
-        <div>
-            <title>My classes</title>
-            {% for class in classes%}
-                <!-- have links to classes here -->
-            {% endfor %}
+        <div id="main-content">
+            <div class="left-main">
+                <div>
+                    <title>User Profile</title>
+                    <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
+                    <p>Email: {{teacher.email}}</p>
+                    <p>Staff position: {{teacher.role}}</p>
+                </div>
+                <div>
+                    <title>My classes</title>
+                    {% for class in classes%}
+                    <!-- have links to classes here -->
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="right-main">
+                <title>Other Classes</title>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Available Classes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- add table data here -->
+                        {% for class in all_classes%}
+                        <tr>
+                            <td>class.name</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="/to_add_class">Add a class</a>
+            </div>
         </div>
-    </div>
-    <div class="col">
-        <title>Other Classes</title>
-        <table>
-            <thead>
-                <tr>
-                    <th>Available Classes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- add table data here -->
-                {% for class in all_classes%}
-                    <tr>
-                        <td>class.name</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="/to_add_class">Add a class</a>
     </div>
 </body>
+
 </html>

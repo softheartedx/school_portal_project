@@ -53,7 +53,8 @@ class User:
                 JOIN enrollment on enrollment.student_id = users.id
                 LEFT JOIN classes on enrollment.class_id = classes.id WHERE users.id =%(id)s'''
         results = connectToMySQL(db).query_db(query, id)
-        one_student = cls(results[0]) #this can be out of for loop because we want to return just one student
+        one_student = cls(results[0])
+        print(one_student) #prints immutable dict
         for row_in_db in results:
             enrollment_data = {
                 'student_id': row_in_db['student_id'],
@@ -68,15 +69,10 @@ class User:
                 "location": row_in_db['location'],
                 "start_date": row_in_db['start_date'],
                 'created_at': row_in_db['classes.created_at'],
-                # 'updated_at': row_in_db['classes.updated_at']
             }
-            # enrollment = cls(enrollment_data)
             one_student.classes.append(Class(one_class_data)) 
-
-            # all_classes.append(enrollment)
         return one_student
 
-    # NEED JOIN QUERIES
 
     @staticmethod
     def user_validator(user):
