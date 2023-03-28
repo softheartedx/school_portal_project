@@ -60,5 +60,24 @@
             </div>
         </div>
     </div>
+    <div class="my-modal container center-fit login-reg-form" id="teacher-edit-profile">
+        <h1 class="header mb-4 pb-1 text-blue">Teacher Registration</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/update_user" method="post">
+            <input type="text" placeholder="First Name" name="first_name" class="form-control mt-2">
+            <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-3">
+            <input type="text" placeholder="Role" name="role" class="form-control mt-3">
+            <input type="text" placeholder="Email" name="email" class="form-control mt-3">
+            <input type="text" placeholder="Password" name="password" class="form-control mt-3">
+            <input type="text" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
+            <button type="submit" class="btn mt-3">Update Profile</button>
+        </form>
+    </div>
     </body>
 </html>
