@@ -9,19 +9,26 @@
     <title>Teacher Registration</title>
 </head>
 <body>
-    <div class="container register">
-        <h1>Teacher Register</h1>
-        <form action="/register/teacher" method="post">
-            <input type="text" placeholder="First Name" name="first_name" class="form-control mt-2">
-            <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-2">
-            <input type="text" placeholder="Staff Position" name="staff_position" class="form-control mt-2">
-            <input type="text" placeholder="Email" name="email" class="form-control mt-2">
-            <input type="text" placeholder="Password" name="password" class="form-control mt-2">
-            <input type="text" placeholder="Confirm Password" name="cpassword" class="form-control mt-2">
-            <button class="btn mt-3">Create Account</button>
+    <div class="container center-fit login-reg-form">
+        <h1 class="header mb-4 pb-1 text-blue">Teacher Registration</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/register" method="post">
+            <input type="text" placeholder="First Name" name="first_name" class="form-control mt-2" autofocus>
+            <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-3">
+            <input type="text" placeholder="Staff Position" name="staff_position" class="form-control mt-3">
+            <input type="text" placeholder="Email" name="email" class="form-control mt-3">
+            <input type="text" placeholder="Password" name="password" class="form-control mt-3">
+            <input type="text" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
+            <button type="submit" class="btn mt-3">Register</button>
         </form>
-        <a href="/login" class="mt-4">Already Registered?</a>
-        <a href="/to_student_register">Student?</a>
+        <a href="/login" class="center-link mt-4">Already Registered?</a>
+        <a href="/to_student_register" class="center-link">I'm a student</a>
     </div>
 </body>
 </html>

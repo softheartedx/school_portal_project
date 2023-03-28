@@ -8,7 +8,7 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    return render_template('student_register.html')
+    return render_template('login.html')
 
 @app.route('/success')
 def success():

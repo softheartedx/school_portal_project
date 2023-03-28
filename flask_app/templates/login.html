@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,22 +8,22 @@
     <link rel="stylesheet" href="../static/style/styles.css">
     <title>Login</title>
 </head>
-
 <body>
-    <div class="container login">
-        <form action="/login" method="post">
-            <h1>Login</h1>
-            <div>
-                <input type="text" name="email" placeholder="Email" class="form-control mt-2">
-            </div>
-
-            <div>
-                <input type="password" name="password" placeholder="Password" class="form-control mt-2">
-            </div>
+    <div class="container login center-fit login-reg-form">
+        <h1 class="header mb-4 pb-1 text-blue">mySchoolPortal</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/sucess" method="post">
+                <input type="text" name="email" placeholder="Email" class="form-control mt-2" autofocus>
+                <input type="password" name="password" placeholder="Password" class="form-control mt-3">
             <button type="submit" class="btn mt-3">Login</button>
         </form>
-        <a href="/to_student_register" class="mt-4">Register</a>
+        <p class="center-link mt-4">Don't have an account? <a href="/to_student_register" class="center-link">Register</a></p> 
     </div>
 </body>
-
 </html>
