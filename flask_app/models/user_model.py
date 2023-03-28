@@ -1,5 +1,7 @@
 from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models.classroom_model import Class
+from flask_app.models.enrollment_model import Enrollment
 import pprint
 import re
 
@@ -18,6 +20,7 @@ class User:
         self.role = data['role']
         self.email = data['email']
         self.password = data['password']
+        self.classes = []
 
     @classmethod
     def save(cls, data):
@@ -37,14 +40,38 @@ class User:
         query = 'SELECT * FROM users WHERE id = %(id)s'
         result = connectToMySQL(db).query_db(query, {'id': id})
         return cls(result[0])
-    
 
     @classmethod
     def update_student(cls, data, id):
         query = f'UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, current_grade=%(current_grade)s, role=%(role)s, email=%(email)s, password=%(password)s WHERE id={id}'
         return connectToMySQL(db).query_db(query, data)
     
-    #NEED JOIN QUERIES
+
+    @classmethod
+    def show_student_with_classes(cls, id):
+        query = '''SELECT * FROM users
+                LEFT JOIN enrollment on enrollment.student_id = users.id
+                LEFT JOIN classes on enrollment.class_id = classes.id WHERE users.id =%(id)s'''
+        results = connectToMySQL(db).query_db(query, id)
+        one_student = cls(results[0])
+        for row_in_db in results:
+            enrollment_data = {
+                'student_id': row_in_db['student_id'],
+                'class_id': row_in_db['class_id'],
+                'created_at': row_in_db['enrollment.created_at'],
+                'updated_at': row_in_db['enrollment.updated_at'],
+            }
+            one_class_data = {
+                'id': row_in_db['classes.id'],
+                "class_name":  row_in_db['class_name'],
+                "description": row_in_db['description'],
+                "location": row_in_db['location'],
+                "start_date": row_in_db['start_date'],
+                'created_at': row_in_db['classes.created_at'],
+            }
+            one_student.classes.append(Class(one_class_data)) 
+        return one_student
+
 
     @staticmethod
     def user_validator(user):

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css'
+        integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
     <link rel="stylesheet" href="../static/style/styles.css">
     <title>Teacher Registration</title>
 </head>
+
 <body>
     <div class="container center-fit login-reg-form">
         <h1 class="header mb-4 pb-1 text-blue">Teacher Registration</h1>
@@ -18,17 +21,18 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form action="/register" method="post">
+        <form action="/register/teacher" method="post">
             <input type="text" placeholder="First Name" name="first_name" class="form-control mt-2" autofocus>
             <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-3">
-            <input type="text" placeholder="Staff Position" name="staff_position" class="form-control mt-3">
+            <input type="text" placeholder="Role" name="role" class="form-control mt-3">
             <input type="text" placeholder="Email" name="email" class="form-control mt-3">
             <input type="text" placeholder="Password" name="password" class="form-control mt-3">
             <input type="text" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
-            <button type="submit" class="btn mt-3">Register</button>
+            <button type="submit" class="btn mt-3">Create Account</button>
         </form>
         <a href="/login" class="center-link mt-4">Already Registered?</a>
         <a href="/to_student_register" class="center-link">I'm a student</a>
     </div>
 </body>
+
 </html>

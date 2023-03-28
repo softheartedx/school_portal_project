@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../static/style/styles.css">
     <title>Teacher Dashboard</title>
 </head>
+
 <body>
     <button class="btn top-nav logout-btn" formaction="/clear_session">Log out</button>
     <h1 class="top">Dashboard</h1>
@@ -15,7 +17,7 @@
         <div class="tile">
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
-                <button class="btn btn-link" formaction="/edit_profile">Edit Profile</button>
+                <button class="btn btn-link" formaction="/show_student_profile/{{teacher.id}}">Edit Profile</button>
             </div>
             <div class="content">
                 <p>Name: {{user.first_name}} {{user.last_name}}</p>
@@ -37,6 +39,7 @@
             <div class="tile-header">
                 <h2 class="text-blue">Other Classes</h2>
                 <button class="btn btn-link" formaction="/new_class_modal">Add Class</button>
+                <!-- <a href="/to_add_class">Add a class</a> -->
             </div>
             <div class="content">
                 <table>

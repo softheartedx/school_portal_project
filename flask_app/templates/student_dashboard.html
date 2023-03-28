@@ -16,6 +16,7 @@
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
                 <button class="btn btn-link" formaction="/edit_profile_modal">Edit Profile</button>
+                <!-- <a href="/show_student_profile/{{student.id}}">Edit Profile</a> -->
             </div>
             <div class="content">
                 <p>Name: {{student.first_name}} {{student.last_name}}</p>
@@ -40,9 +41,9 @@
                     </thead>
                     <tbody>
                         <!-- add table data here -->
-                        {% for class in all_classes%}
+                        {% for class in one_student.classes%}
                             <tr>
-                                <td>{{class.name}}</td>
+                                <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
                                 <td>{{class.grade}}</td>
                             </tr>
                         {% endfor %}
