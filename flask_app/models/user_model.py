@@ -40,6 +40,7 @@ class User:
         query = 'SELECT * FROM users WHERE id = %(id)s'
         result = connectToMySQL(db).query_db(query, {'id': id})
         return cls(result[0])
+    
 
     @classmethod
     def update_student(cls, data, id):
@@ -85,9 +86,6 @@ class User:
         if len(user['last_name']) <= 2:
             flash("Your last name must be at least 2 characters long.")
             is_valid = False
-        # if len(user['current_grade']) <= 0:
-        #     flash("Please enter your current grade.")
-        #     is_valid = False
         if len(user['password']) <= 5:
             flash("Your password must be at least 8 characters long.")
             is_valid = False
@@ -98,3 +96,4 @@ class User:
             flash("Your password does not match.")
             is_valid = False
         return is_valid
+    

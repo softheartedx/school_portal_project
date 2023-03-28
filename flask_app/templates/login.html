@@ -14,6 +14,13 @@
     <div class="container login">
         <form action="/login" method="post">
             <h1>Login</h1>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <p style="color: rgb(170, 0, 0) ;">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
             <div>
                 <input type="text" name="email" placeholder="Email" class="form-control mt-2">
             </div>
