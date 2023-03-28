@@ -105,7 +105,11 @@ def success_teacher():
     if 'user_id' not in session:
         flash("You must log in to access this page!")
         return redirect('/')
-    return render_template('teacher_dashboard.html', teacher=User.get_user_by_id(session['user_id']))
+    data = {
+        'id': session['user_id']
+    }
+    one_student = User.show_student_with_classes(data)
+    return render_template('teacher_dashboard.html', teacher=User.get_user_by_id(session['user_id']), one_student=one_student)
 
 
 

@@ -29,8 +29,8 @@
 
                 <div>
                     <title>My classes</title>
-                    {% for class in classes%}
-                    <!-- have links to classes here -->
+                    {% for class in one_student.classes%}
+                    <p>{{class.class_name}}</p>
                     {% endfor %}
                 </div>
             </div>

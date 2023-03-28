@@ -22,4 +22,4 @@ def get_one_class_teacher(class_id):
         'class_id': class_id
     }
     one_class = Class.get_one_class(data)
-    return render_template('student_view_class.html', class_info = one_class)
+    return render_template('teacher_view_class.html', class_info = one_class)
