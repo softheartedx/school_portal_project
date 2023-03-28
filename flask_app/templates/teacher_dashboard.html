@@ -18,11 +18,12 @@
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
                 <button class="btn btn-link" formaction="/show_student_profile/{{teacher.id}}">Edit Profile</button>
+                <!-- <a href="/show_student_profile/{{teacher.id}}">Edit Profile</a> -->
             </div>
             <div class="content">
-                <p>Name: {{user.first_name}} {{user.last_name}}</p>
-                <p>Email: {{user.email}}</p>
-                <p>Staff position: {{user.staff_position}}</p>
+                <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
+                <p>Email: {{teacher.email}}</p>
+                <p>Staff position: {{teacher.role}}</p>
             </div>
         </div>
         <div class="tile">
@@ -30,8 +31,8 @@
                 <h2 class="text-blue">My classes</h2>
             </div>
             <div class="content">
-            {% for class in classes%}
-                <p><a href="">class.name</a></p><!-- have links to classes here -->
+            {% for class in one_student.classes%}
+                <p><a href="">class.class_name</a></p><!-- have links to classes here -->
             {% endfor %}
             </div>
         </div>
@@ -52,7 +53,7 @@
                         <!-- add table data here -->
                         {% for class in all_classes%}
                             <tr>
-                                <td><a href="">class.name</a></td>link to one_class
+                                <td><a href="">{{class.class_name}}</a></td>link to one_class
                             </tr>
                         {% endfor %}
                     </tbody>
