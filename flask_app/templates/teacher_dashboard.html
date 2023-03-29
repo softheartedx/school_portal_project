@@ -11,19 +11,22 @@
 </head>
 
 <body>
-    <button class="btn top-nav logout-btn" formaction="/clear_session">Log out</button>
+    <form action="/clear_session">
+        <button class="btn top-nav logout-btn">Log out</button>
+    </form>
     <h1 class="top">Dashboard</h1>
+    <!-- --Dashboard Grid-- -->
     <div class="container dashboard-grid">
         <div class="tile">
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
-                <button class="btn btn-link" formaction="/show_student_profile/{{teacher.id}}">Edit Profile</button>
-                <!-- <a href="/show_student_profile/{{teacher.id}}">Edit Profile</a> -->
+                <button class="btn btn-link" formaction="/edit_student_profile/{{one_student.id}}">Edit Profile</button>
+                <a href="/show_student_profile/{{user.id}}">Edit Profile</a>
             </div>
             <div class="content">
-                <p>Name: {{teacher.first_name}} {{teacher.last_name}}</p>
-                <p>Email: {{teacher.email}}</p>
-                <p>Staff position: {{teacher.role}}</p>
+                <p>Name: {{user.first_name}} {{user.last_name}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Staff position: {{user.role}}</p>
             </div>
         </div>
         <div class="tile">
@@ -40,7 +43,6 @@
             <div class="tile-header">
                 <h2 class="text-blue">Other Classes</h2>
                 <button class="btn btn-link" formaction="/new_class_modal">Add Class</button>
-                <!-- <a href="/to_add_class">Add a class</a> -->
             </div>
             <div class="content">
                 <table>
@@ -61,8 +63,13 @@
             </div>
         </div>
     </div>
-    <div class="my-modal container center-fit login-reg-form" id="teacher-edit-profile">
-        <h1 class="header mb-4 pb-1 text-blue">Teacher Registration</h1>
+
+    <!-- --Edit modal-- -->
+    <!-- <div class="my-modal container center-fit login-reg-form" id="teacher-edit-profile">
+        <div class="tile-header">
+            <h1 class="text-blue">Update Profile</h1>
+            <span class="close">&times;</span>
+        </div>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -75,10 +82,10 @@
             <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-3">
             <input type="text" placeholder="Role" name="role" class="form-control mt-3">
             <input type="text" placeholder="Email" name="email" class="form-control mt-3">
-            <input type="text" placeholder="Password" name="password" class="form-control mt-3">
-            <input type="text" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
+            <input type="password" placeholder="Password" name="password" class="form-control mt-3">
+            <input type="password" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
             <button type="submit" class="btn mt-3">Update Profile</button>
         </form>
-    </div>
+    </div> -->
     </body>
 </html>

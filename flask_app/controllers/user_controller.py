@@ -12,9 +12,13 @@ bcrypt = Bcrypt(app)
 def index():
     return render_template('login.html')
 
-@app.route('/login_page')
-def login():
-    return render_template('login.html')
+@app.route('/student_registration_page')
+def student_reg():
+    return render_template('student_register.html')
+
+@app.route('/teacher_registration_page')
+def teacher_reg():
+    return render_template('teacher_register.html')
 
 @app.route('/clear_session')
 def clear_session():
@@ -24,21 +28,33 @@ def clear_session():
 
 
 #STUDENT ROUTES
-@app.route('/register', methods=['post'])
-def register():
-    if not User.user_validator(request.form):
+@app.route('/register/<role>', methods=['post'])
+def register(role):
+    temp_dict = dict(request.form)
+    print(request.form)
+    if role == 'teacher':
+        temp_dict['current_grade'] = '1'
+    if role == 'student':
+        temp_dict['role'] = 'student'
+    if not User.user_validator(temp_dict):
         return redirect('/')
-    if User.get_user_by_email(request.form) == True:
+    if User.get_user_by_email(request.form) != False:
         flash('This email address is already in use!')
+        if role == 'teacher':
+            return redirect('/teacher_registration_page')
+        if role == 'student':
+            return redirect('/student_registration_page')
+    print(temp_dict)
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
     data = {
-        'first_name': request.form['first_name'],
-        'last_name': request.form['last_name'],
-        'current_grade': request.form['current_grade'],
-        'role': request.form['role'],
-        'email': request.form['email'],
+        'first_name': temp_dict['first_name'],
+        'last_name': temp_dict['last_name'],
+        'current_grade': temp_dict['current_grade'],
+        'role': temp_dict['role'],
+        'email': temp_dict['email'],
         'password': pw_hash
     }
+    print(data)
     user_id = User.save(data)
     session['user_id'] = user_id
     print(request.form)
@@ -52,10 +68,10 @@ def login_route():
     print(user_in_db)
     if not user_in_db:
         flash("The email or password is incorrect!")
-        return redirect('/login_page')
+        return redirect('/')
     if not bcrypt.check_password_hash(user_in_db.password, request.form['password']):
         flash("The email or password is incorrect!")
-        return redirect('/login_page')
+        return redirect('/')
     session['user_id'] = user_in_db.id
     return redirect('/success')
 
@@ -69,7 +85,10 @@ def success():
         'id': session['user_id']
     }
     one_student = User.show_student_with_classes(data)
-    return render_template('student_dashboard.html', student=User.get_user_by_id(session['user_id']), one_student=one_student)
+    if one_student.role != 'student':
+        return render_template('teacher_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student)
+    if one_student.role == 'student':
+        return render_template('student_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student)
 
 
 
@@ -79,37 +98,37 @@ def teacher_registration():
     return render_template('teacher_register.html')
 
 
-@app.route('/register/teacher', methods=['post'])
-def register_teacher():
-    if not User.user_validator(request.form):
-        return redirect('/')
-    if User.get_user_by_email(request.form) == True:
-        flash('This email address is already in use!')
-    pw_hash = bcrypt.generate_password_hash(request.form['password'])
-    data = {
-        'first_name': request.form['first_name'],
-        'last_name': request.form['last_name'],
-        'current_grade': request.form['current_grade'],
-        'role': request.form['role'],
-        'email': request.form['email'],
-        'password': pw_hash
-    }
-    user_id = User.save(data)
-    session['user_id'] = user_id
-    print(request.form)
-    return redirect('/success/teacher')
+# @app.route('/register/teacher', methods=['post'])
+# def register_teacher():
+#     if not User.user_validator(request.form):
+#         return redirect('/')
+#     if User.get_user_by_email(request.form) == True:
+#         flash('This email address is already in use!')
+#     pw_hash = bcrypt.generate_password_hash(request.form['password'])
+#     data = {
+#         'first_name': request.form['first_name'],
+#         'last_name': request.form['last_name'],
+#         'current_grade': request.form['current_grade'],
+#         'role': request.form['role'],
+#         'email': request.form['email'],
+#         'password': pw_hash
+#     }
+#     user_id = User.save(data)
+#     session['user_id'] = user_id
+#     print(request.form)
+#     return redirect('/success/teacher')
 
 
-@app.route('/success/teacher')
-def success_teacher():
-    if 'user_id' not in session:
-        flash("You must log in to access this page!")
-        return redirect('/')
-    data = {
-        'id': session['user_id']
-    }
-    one_student = User.show_student_with_classes(data)
-    return render_template('teacher_dashboard.html', teacher=User.get_user_by_id(session['user_id']), one_student=one_student)
+# @app.route('/success/teacher')
+# def success_teacher():
+#     if 'user_id' not in session:
+#         flash("You must log in to access this page!")
+#         return redirect('/')
+#     data = {
+#         'id': session['user_id']
+#     }
+#     one_student = User.show_student_with_classes(data)
+#     return render_template('teacher_dashboard.html', teacher=User.get_user_by_id(session['user_id']), one_student=one_student)
 
 
 
@@ -121,7 +140,7 @@ def edit_profile(student_id):
 
 @app.route('/edit_student_profile/<int:student_id>', methods=['POST'])
 def update_profile(student_id):
-    if not User.user_validator(request.form):
+    if not User.update_user_validator(request.form):
         return redirect(f'/show_student_profile/{student_id}')
     User.update_student(request.form, student_id)
     print(request.form)

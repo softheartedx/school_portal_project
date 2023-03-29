@@ -44,7 +44,7 @@ class User:
 
     @classmethod
     def update_student(cls, data, id):
-        query = f'UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, current_grade=%(current_grade)s, role=%(role)s, email=%(email)s, password=%(password)s WHERE id={id}'
+        query = f'UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, current_grade=%(current_grade)s, role=%(role)s, email=%(email)s WHERE id={id}'
         return connectToMySQL(db).query_db(query, data)
     
 
@@ -86,14 +86,43 @@ class User:
         if len(user['last_name']) <= 2:
             flash("Your last name must be at least 2 characters long.")
             is_valid = False
-        if len(user['password']) <= 5:
-            flash("Your password must be at least 8 characters long.")
+        if len(user['current_grade']) < 1:
+            flash("Your grade must be at least 1 characters long.")
+            is_valid = False
+        if len(user['role']) <= 2:
+            flash("Your role must be at least 2 characters long.")
             is_valid = False
         if not email_REGEX.match(user['email']):
             flash('Your email is invalid.')
             is_valid = False
+        if len(user['password']) <= 5:
+            flash("Your password must be at least 8 characters long.")
+            is_valid = False
         if not user['password'] == user['cpassword']:
             flash("Your password does not match.")
+            is_valid = False
+        return is_valid
+
+    @staticmethod
+    def update_user_validator(user):
+        is_valid = True
+        if len(user['first_name']) <= 0 or len(user['last_name']) <= 0 or len(user['current_grade']) <= 0 or len(user['email']) <= 0:
+            flash('All fields are required!')
+            is_valid = False
+        if len(user['first_name']) <= 2:
+            flash("Your first name must be at least 2 characters long.")
+            is_valid = False
+        if len(user['last_name']) <= 2:
+            flash("Your last name must be at least 2 characters long.")
+            is_valid = False
+        if len(user['current_grade']) < 1:
+            flash("Your grade must be at least 1 characters long.")
+            is_valid = False
+        if len(user['role']) <= 2:
+            flash("Your role must be at least 2 characters long.")
+            is_valid = False
+        if not email_REGEX.match(user['email']):
+            flash('Your email is invalid.')
             is_valid = False
         return is_valid
     

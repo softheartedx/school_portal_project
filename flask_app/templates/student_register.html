@@ -18,16 +18,16 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-            <form action="/register/student" method="post">
-                <input type="text" name="first_name" placeholder="First Name" class="form-control mt-2" autofocus>
-                <input type="text" name="last_name" placeholder="Last Name" class="form-control mt-3">
-                <input type="number" name="current_grade" placeholder="Current Grade" class="form-control mt-3" min="1" max="12">
-                <input type="email" name="email" placeholder="Email" class="form-control mt-3">
-                <input type="password" name="password" placeholder="Password" class="form-control mt-3">
-                <input type="password" name="cpassword" placeholder="Confirm Password" class="form-control mt-3">
+        <form action="/register/student" method="post">
+            <input type="text" name="first_name" placeholder="First Name" class="form-control mt-2" autofocus>
+            <input type="text" name="last_name" placeholder="Last Name" class="form-control mt-3">
+            <input type="number" name="current_grade" placeholder="Current Grade" class="form-control mt-3" min="1" max="12">
+            <input type="email" name="email" placeholder="Email" class="form-control mt-3">
+            <input type="password" name="password" placeholder="Password" class="form-control mt-3">
+            <input type="password" name="cpassword" placeholder="Confirm Password" class="form-control mt-3">
             <button type="submit" class="btn mt-3">Register</button>
         </form>
-        <a href="/login_page" class="center-link mt-4">Already Registered?</a>
+        <a href="/" class="center-link mt-4">Already Registered?</a>
         <a href="/teacher_registration" class="center-link">I'm a teacher</a>
     </div>
 </body>

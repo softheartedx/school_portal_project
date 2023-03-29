@@ -27,10 +27,8 @@
                 <div>
                     <input type="text" name="first_name" value="{{one_student.first_name}}" class="form-control mt-2">
                     <input type="text" name="last_name" value="{{one_student.last_name}}" class="form-control mt-2">
-                    <input type="text" name="current_grade" value="{{one_student.current_grade}}" class="form-control mt-2">
-                    <input readonly="readonly" type="text" name="role" value="Student" class="form-control mt-2">
-                    <input type="text" name="email" value="{{one_student.email}}" class="form-control mt-2">
-                    <input type="password" name="password" class="form-control mt-2" placeholder="password">
-                    <input type="password" name="cpassword" placeholder="Confirm Password" class="form-control mt-2">
+                    <input type="number" name="current_grade" value="{{one_student.current_grade}}" class="form-control mt-2" min="1" max="12">
+                    <input {% if one_student.role == 'student' %} readonly="readonly" {% endif %} type="text" name="role" value="{{one_student.role}}" class="form-control mt-2">
+                    <input type="email" name="email" value="{{one_student.email}}" class="form-control mt-2">
                 <button type="submit" class="btn mt-3">Update</button>
             </form>

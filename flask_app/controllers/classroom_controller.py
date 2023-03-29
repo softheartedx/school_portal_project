@@ -14,6 +14,7 @@ def get_one_class(class_id):
         'class_id': class_id
     }
     one_class = Class.get_one_class(data)
+    print(one_class)
     return render_template('student_view_class.html', class_info = one_class)
 
 @app.route('/show_one_class/<int:class_id>')

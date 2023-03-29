@@ -27,11 +27,11 @@ class Class:
         return connectToMySQL(db).query_db(query, data)
 
     @classmethod
-    def get_one_class(cls, class_id):
+    def get_one_class(cls, data):
         query = 'SELECT * FROM classes WHERE id=%(class_id)s'
-        result = connectToMySQL(db).query_db(query, class_id)
+        result = connectToMySQL(db).query_db(query, data)
         print(result)
-        return result
+        return cls(result[0])
 
 
     @classmethod

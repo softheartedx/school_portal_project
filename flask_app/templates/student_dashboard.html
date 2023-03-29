@@ -9,27 +9,29 @@
     <title>Student Dashboard</title>
 </head>
 <body>
-    <button class="btn top-nav logout-btn" formaction="/clear_session">Log out</button>
+    <form action="/clear_session">
+        <button class="btn top-nav logout-btn">Log out</button>
+    </form>
     <h1 class="top">Dashboard</h1>
     <div class="container dashboard-grid">
         <div class="tile">
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
                 <button class="btn btn-link" formaction="/edit_profile_modal">Edit Profile</button>
-                <!-- <a href="/show_student_profile/{{student.id}}">Edit Profile</a> -->
+                <a href="/show_student_profile/{{user.id}}">Edit Profile</a>
             </div>
             <div class="content">
-                <p>Name: {{student.first_name}} {{student.last_name}}</p>
-                <p> Email: {{student.email}}</p>
-                <p>Current Grade: {{student.current_grade}}</p>
-                <p>GPA:{{student.gpa}} </p>
-                <!-- <a href="/show_student_profile/{{student.id}}">Edit Profile</a> -->
+                <p>Name: {{user.first_name}} {{user.last_name}}</p>
+                <p> Email: {{user.email}}</p>
+                <p>Current Grade: {{user.current_grade}}</p>
             </div>
         </div>
         <div class="tile">
             <div class="tile-header">
                 <h2 class="text-blue">Classes</h2>
-                <button class="btn btn-link" formaction="/all_classes">Enroll in class</button>
+                <form action="/all_classes">
+                    <button class="btn btn-link">Enroll in class</button>
+                </form>
             </div>
             <div class="content">
                 <table>
@@ -52,5 +54,28 @@
             </div>
         </div>
     </div>
+
+    <!-- <div class="my-modal container center-fit login-reg-form" id="teacher-edit-profile">
+        <div class="tile-header">
+            <h1 class="text-blue">Update Profile</h1>
+            <span class="close">&times;</span>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+            <form action="/register/student" method="post">
+                <input type="text" name="first_name" placeholder="First Name" class="form-control mt-2">
+                <input type="text" name="last_name" placeholder="Last Name" class="form-control mt-3">
+                <input type="number" name="current_grade" placeholder="Current Grade" class="form-control mt-3" min="1" max="12">
+                <input type="email" name="email" placeholder="Email" class="form-control mt-3">
+                <input type="password" name="password" placeholder="Password" class="form-control mt-3">
+                <input type="password" name="cpassword" placeholder="Confirm Password" class="form-control mt-3">
+            <button type="submit" class="btn mt-3">Register</button>
+        </form>
+    </div> -->
 </body>
 </html>
