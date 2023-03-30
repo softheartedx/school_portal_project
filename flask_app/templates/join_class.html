@@ -32,11 +32,11 @@
                     <p>Teacher: {{class.teacher_id}}</p>
                     <p>Location: {{class.location}} | Start Date: {{class.start_date.strftime('%B %e, %Y')}}</p>
                 </div>
-                <p>Description:</p>
-                <p class="indent">{{class.description}}</p>
                 <form action="/enroll_in_class/{{class.id}}" method="post">
                     <button class="btn enroll-btn" type="submit">Enroll</button>
                 </form>
+                <p>Description:</p>
+                <p class="indent">{{class.description}}</p>
                 <hr>
             </div>
         {% endfor %}
