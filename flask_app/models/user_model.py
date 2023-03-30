@@ -87,7 +87,7 @@ class User:
                 'created_at': row_in_db['classes.created_at'],
             }
             # EITHER DUPLICATING CLASSES OR REPLACES CLASSES IN LIST ON FRONT-END
-        one_teacher.classes.append(Class(one_class_data))
+            one_teacher.classes.append(Class(one_class_data))
         print(one_class_data)
         return one_teacher
 
