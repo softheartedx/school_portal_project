@@ -84,7 +84,7 @@ class Class:
             flash('All fields are required!')
             is_valid = False
         if len(class_data['class_name']) <= 2:
-            flash("The class name must be at least 2 characters long.")
+            flash("The class name must be at least 3 characters long.")
             is_valid = False
         if len(class_data['location']) <= 2:
             flash("The location must be at least 2 characters long.")
