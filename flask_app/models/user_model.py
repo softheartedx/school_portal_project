@@ -76,7 +76,6 @@ class User:
         query = 'SELECT * FROM users JOIN classes on classes.teacher_id = %(id)s'
         results = connectToMySQL(db).query_db(query, id)
         one_teacher = cls(results[0])
-        print(one_teacher.classes)
         for row_in_db in results:
             one_class_data = {
                 'id': row_in_db['classes.id'],
