@@ -41,7 +41,7 @@ class Class:
     
     @classmethod
     def delete_class(cls, data):
-        query = 'DELETE FROM classes WHERE id=%(class_id)s'
+        query = 'DELETE FROM classes WHERE id=%(id)s'
         return connectToMySQL(db).query_db(query, data)
 
     @staticmethod

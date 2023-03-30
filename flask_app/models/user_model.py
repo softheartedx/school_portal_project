@@ -76,6 +76,7 @@ class User:
         query = 'SELECT * FROM users JOIN classes on classes.teacher_id = %(id)s'
         results = connectToMySQL(db).query_db(query, id)
         one_teacher = cls(results[0])
+        print(one_teacher.classes)
         for row_in_db in results:
             one_class_data = {
                 'id': row_in_db['classes.id'],
@@ -85,7 +86,9 @@ class User:
                 "start_date": row_in_db['start_date'],
                 'created_at': row_in_db['classes.created_at'],
             }
-            one_teacher.classes.append(Class(one_class_data))
+            # EITHER DUPLICATING CLASSES OR REPLACES CLASSES IN LIST ON FRONT-END
+        one_teacher.classes.append(Class(one_class_data))
+        print(one_class_data)
         return one_teacher
 
     @staticmethod

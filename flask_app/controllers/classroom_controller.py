@@ -17,10 +17,10 @@ def get_one_class(class_id):
     one_class = Class.get_one_class(data)
     return render_template('student_view_class.html', class_info = one_class, teacher_classes=User.teacher_with_classes({'id': session['user_id']}))
 
-@app.route('/delete_class/<int:class_id>')
-def delete_class(class_id):
+@app.route('/delete_class/<int:id>')
+def delete_class(id):
     data = {
-        'class_id': class_id
+        'id': id
     }
     Class.delete_class(data)
     return redirect('/success')
