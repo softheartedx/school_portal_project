@@ -15,8 +15,15 @@ def get_one_class(class_id):
         'class_id': class_id
     }
     one_class = Class.get_one_class(data)
-    print(one_class)
-    return render_template('student_view_class.html', class_info = one_class)
+    return render_template('student_view_class.html', class_info = one_class, teacher_classes=User.teacher_with_classes({'id': session['user_id']}))
+
+@app.route('/delete_class/<int:class_id>')
+def delete_class(class_id):
+    data = {
+        'class_id': class_id
+    }
+    Class.delete_class(data)
+    return redirect('/success')
 
 
 #NOT USING THIS YET
@@ -43,5 +50,4 @@ def save_class(teacher_id):
     Class.save(data)
     return redirect('/success')
 
-# @app.route('/show_teacher_classes/<int:teacher_id>')
 

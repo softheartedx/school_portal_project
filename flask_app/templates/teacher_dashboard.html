@@ -44,9 +44,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for class in one_student.classes%}
+                        <!-- FOR LOOP RETURNING MULTIPLE ROWS OF SAME DATA -->
+                        {% for class in teacher_classes.classes %}
                         <tr>
-                            <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
+                            <td><a href="/show_one_class/{{class.id}}">{{class.class_name}} </a> | <a href="/delete_class/{{class.id}}">Delete Class</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

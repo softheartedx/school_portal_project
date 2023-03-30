@@ -90,7 +90,7 @@ def success():
     all_classes = Class.get_all_classes()
     print(one_student)
     if one_student.role != 'student':
-        return render_template('teacher_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student, all_classes=Class.get_all_classes())
+        return render_template('teacher_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student, all_classes=Class.get_all_classes(), teacher_classes=User.teacher_with_classes(data))
     if one_student.role == 'student':
         return render_template('student_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student)
 

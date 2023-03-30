@@ -38,6 +38,31 @@ class Class:
     def get_all_classes(cls):
         query = 'SELECT * FROM classes'
         return connectToMySQL(db).query_db(query)
+    
+    @classmethod
+    def delete_class(cls, data):
+        query = 'DELETE FROM classes WHERE id=%(class_id)s'
+        return connectToMySQL(db).query_db(query, data)
+
+    @staticmethod
+    def class_validator(class_data):
+        is_valid = True
+        if len(class_data['class_name']) <= 0 or len(class_data['location']) <= 0 or len(class_data['start_date']) <= 0 or len(class_data['description']) <= 0:
+            flash('All fields are required!')
+            is_valid = False
+        if len(class_data['class_name']) <= 2:
+            flash("The class name must be at least 2 characters long.")
+            is_valid = False
+        if len(class_data['location']) <= 2:
+            flash("The location must be at least 2 characters long.")
+            is_valid = False
+        if len(class_data['start_date']) < 1:
+            flash("Select a start date.")
+            is_valid = False
+        if len(class_data['description']) <= 2:
+            flash("The class description is too short.")
+            is_valid = False
+        return is_valid
 
 
 # # RETURNING FALSE

@@ -40,13 +40,11 @@ class User:
         query = 'SELECT * FROM users WHERE id = %(id)s'
         result = connectToMySQL(db).query_db(query, {'id': id})
         return cls(result[0])
-    
 
     @classmethod
     def update_student(cls, data, id):
         query = f'UPDATE users SET first_name=%(first_name)s, last_name=%(last_name)s, current_grade=%(current_grade)s, role=%(role)s, email=%(email)s WHERE id={id}'
         return connectToMySQL(db).query_db(query, data)
-    
 
     @classmethod
     def show_student_with_classes(cls, id):
@@ -70,9 +68,25 @@ class User:
                 "start_date": row_in_db['start_date'],
                 'created_at': row_in_db['classes.created_at'],
             }
-            one_student.classes.append(Class(one_class_data)) 
+            one_student.classes.append(Class(one_class_data))
         return one_student
 
+    @classmethod
+    def teacher_with_classes(cls, id):
+        query = 'SELECT * FROM users JOIN classes on classes.teacher_id = %(id)s'
+        results = connectToMySQL(db).query_db(query, id)
+        one_teacher = cls(results[0])
+        for row_in_db in results:
+            one_class_data = {
+                'id': row_in_db['classes.id'],
+                "class_name":  row_in_db['class_name'],
+                "description": row_in_db['description'],
+                "location": row_in_db['location'],
+                "start_date": row_in_db['start_date'],
+                'created_at': row_in_db['classes.created_at'],
+            }
+            one_teacher.classes.append(Class(one_class_data))
+        return one_teacher
 
     @staticmethod
     def user_validator(user):
@@ -125,4 +139,3 @@ class User:
             flash('Your email is invalid.')
             is_valid = False
         return is_valid
-    
