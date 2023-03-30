@@ -7,21 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
     <link rel="stylesheet" href="../static/style/styles.css">
+    <script src="../static/script/script.js" defer></script>
     <title>Teacher Dashboard</title>
 </head>
 
 <body>
-    <form action="/clear_session">
-        <button class="btn top-nav logout-btn">Log out</button>
-    </form>
+    <div class="top-nav">
+        <form action="/clear_session">
+            <button class="btn logout-btn">Log out</button>
+        </form>
+    </div>
     <h1 class="top">Dashboard</h1>
     <!-- --Dashboard Grid-- -->
     <div class="container dashboard-grid">
         <div class="tile">
             <div class="tile-header">
                 <h2 class="text-blue">User Profile</h2>
-                <button class="btn btn-link" formaction="/edit_student_profile/{{one_student.id}}">Edit Profile</button>
-                <a href="/show_student_profile/{{user.id}}">Edit Profile</a>
+                <button class="btn btn-link" data-modal-target="#edit_profile">Edit Profile</button>
             </div>
             <div class="content">
                 <p>Name: {{user.first_name}} {{user.last_name}}</p>
@@ -34,41 +36,41 @@
                 <h2 class="text-blue">My classes</h2>
             </div>
             <div class="content">
-            {% for class in one_student.classes%}
-                <p><a href="">class.class_name</a></p><!-- have links to classes here -->
+            {% for class in one_student.classes %}
+                <p><a href="">{{class.class_name}}</a></p><!-- have links to classes here -->
             {% endfor %}
             </div>
         </div>
         <div class="tile grid-row-span-2">
             <div class="tile-header">
                 <h2 class="text-blue">Other Classes</h2>
-                <button class="btn btn-link" formaction="/new_class_modal">Add Class</button>
+                <button class="btn btn-link" data-modal-target="#add_class">Add Class</button>
             </div>
             <div class="content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Available Classes</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- add table data here -->
-                        {% for class in all_classes%}
+                {% if not all_classes %}
+                    <p class="text-muted">There are no other class, create one?</p>
+                {% endif %}
+                {% if all_classes%}
+                    <table class="table">
+                        <tbody>
+                            <!-- add table data here -->
+                            {% for class in all_classes%}
                             <tr>
-                                <td><a href="">{{class.class_name}}</a></td>link to one_class
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                    <td><a href="">{{class.class_name}}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
             </div>
         </div>
     </div>
 
     <!-- --Edit modal-- -->
-    <!-- <div class="my-modal container center-fit login-reg-form" id="teacher-edit-profile">
+    <div class="my-modal container" id="edit_profile">
         <div class="tile-header">
             <h1 class="text-blue">Update Profile</h1>
-            <span class="close">&times;</span>
+            <button data-close-button class="close-btn">&times;</button>
         </div>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
@@ -77,15 +79,58 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form action="/update_user" method="post">
-            <input type="text" placeholder="First Name" name="first_name" class="form-control mt-2">
-            <input type="text" placeholder="Last Name" name="last_name" class="form-control mt-3">
-            <input type="text" placeholder="Role" name="role" class="form-control mt-3">
-            <input type="text" placeholder="Email" name="email" class="form-control mt-3">
-            <input type="password" placeholder="Password" name="password" class="form-control mt-3">
-            <input type="password" placeholder="Confirm Password" name="cpassword" class="form-control mt-3">
-            <button type="submit" class="btn mt-3">Update Profile</button>
+        <form action="/edit_student_profile/{{one_student.id}}" method="post">
+
+            <label for="first_name">First Name:</label>
+            <input type="text" value="{{one_student.first_name}}" name="first_name" class="form-control">
+
+            <label for="first_name">Last Name:</label>
+            <input type="text" value="{{one_student.last_name}}" name="last_name" class="form-control">
+
+            <label for="first_name">Role:</label>
+            <input type="text" value="{{one_student.role}}" name="role" class="form-control" {% if one_student.role == 'student' %}readonly {% endif %}>
+
+            <label for="first_name">Current Grade:</label>
+            <input type="number" name="current_grade" value="{{one_student.current_grade}}" class="form-control" min="1" max="12">
+
+            <label for="first_name">Email:</label>
+            <input type="email" value="{{one_student.email}}" name="email" class="form-control">
+
+            <button type="submit" class="btn mt-3 blue-btn">Update Profile</button>
         </form>
-    </div> -->
+    </div>
+
+    <!-- --Add class modal-- -->
+    <div class="my-modal container" id="add_class">
+        <div class="tile-header">
+            <h1 class="text-blue">Add a class</h1>
+            <button data-close-button class="close-btn">&times;</button>
+        </div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="error-message">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <form action="/save_class/{{one_student.id}}" method="post">
+
+            <label for="class_name">Class Name:</label>
+            <input type="text" name="class_name" class="form-control">
+
+            <label for="location">Location:</label>
+            <input type="text" name="location" class="form-control">
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" name="start_date" class="form-control">
+
+            <label for="description">Description:</label>
+            <br>
+            <textarea name="description" class="form-control"></textarea>
+
+            <button type="submit" class="btn mt-3 blue-btn">Create Class</button>
+        </form>
+    </div>
+    <div id="overlay"></div>
     </body>
 </html>

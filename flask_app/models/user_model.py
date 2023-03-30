@@ -106,7 +106,7 @@ class User:
     @staticmethod
     def update_user_validator(user):
         is_valid = True
-        if len(user['first_name']) <= 0 or len(user['last_name']) <= 0 or len(user['current_grade']) <= 0 or len(user['email']) <= 0:
+        if len(user['first_name']) <= 0 or len(user['last_name']) <= 0 or len(user['current_grade']) <= 0 or len(user['role']) <= 0 or len(user['email']) <= 0:
             flash('All fields are required!')
             is_valid = False
         if len(user['first_name']) <= 2:

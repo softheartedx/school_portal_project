@@ -1,6 +1,7 @@
 from flask_app import app
 from flask import render_template, request, redirect, session, flash
 from flask_app.models.user_model import User
+from flask_app.models.classroom_model import Class
 from flask_app.models.enrollment_model import Enrollment
 from flask_bcrypt import Bcrypt
 
@@ -85,8 +86,10 @@ def success():
         'id': session['user_id']
     }
     one_student = User.show_student_with_classes(data)
+    all_classes = Class.get_all_classes()
+    print(one_student)
     if one_student.role != 'student':
-        return render_template('teacher_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student)
+        return render_template('teacher_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student, all_classes=all_classes)
     if one_student.role == 'student':
         return render_template('student_dashboard.html', user=User.get_user_by_id(session['user_id']), one_student=one_student)
 
@@ -141,7 +144,7 @@ def edit_profile(student_id):
 @app.route('/edit_student_profile/<int:student_id>', methods=['POST'])
 def update_profile(student_id):
     if not User.update_user_validator(request.form):
-        return redirect(f'/show_student_profile/{student_id}')
+        return redirect('/success')
     User.update_student(request.form, student_id)
     print(request.form)
     return redirect('/success')

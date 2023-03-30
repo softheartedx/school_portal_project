@@ -8,32 +8,38 @@
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css'
         integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
     <link rel="stylesheet" href="../static/style/styles.css">
-    <title>Class Enrollment List</title>
+    <title>Class Enrollment</title>
 </head>
 
 <body>
+    <div class="top-nav">
+        <form action="/success">
+            <button class="btn back-to-dash-btn">Back to dashboard</button>
+        </form>
+        <form action="/clear_session">
+            <button class="btn logout-btn">Log out</button>
+        </form>
+    </div>
+    <h1 class="top">Enrollment</h1>
+    <!-- {% if not all_classes%}
+        <h2 class="empty-msg">There are currently no available classes, check back later..</h2>
+    {% endif %} -->
     <div class="container enrollment">
-        <div id="top-bar">
-            <h1>Enrollment</h1>
-            <div>
-                <button class="btn btn-sm"> <a href="/clear_session">Logout</a> </button>
-                <button class="btn btn-sm"><a href="/success">Back to dashboard</a></button>
-            </div>
-        </div>
         {% for class in all_classes%}
-        <div>
-            <hr>
-            <h3>{{class.class_name}}</h3>
-            <p>{{class.location}}</p>
-            <p> {{class.start_date}}</p>
-            <p>{{class.description}}</p>
-            <form action="/enroll_in_class/{{class.id}}" method="post">
-                <button class="btn btn-sm" type="submit">Enroll</button>
-            </form>
-        </div>
+            <div class="one_class">
+                <h2 class="class_name">{{class.class_name}}</h2>
+                <div class="sub-info">
+                    <p>Teacher: {{class.teacher_id}}</p>
+                    <p>Location: {{class.location}} | Start Date: {{class.start_date.strftime('%B %e, %Y')}}</p>
+                </div>
+                <p>Description:</p>
+                <p class="indent">{{class.description}}</p>
+                <form action="/enroll_in_class/{{class.id}}" method="post">
+                    <button class="btn enroll-btn" type="submit">Enroll</button>
+                </form>
+                <hr>
+            </div>
         {% endfor %}
-        <hr>
-
     </div>
 </body>
 

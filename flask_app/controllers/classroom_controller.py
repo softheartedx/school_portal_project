@@ -24,3 +24,18 @@ def get_one_class_teacher(class_id):
     }
     one_class = Class.get_one_class(data)
     return render_template('teacher_view_class.html', class_info = one_class)
+
+@app.route('/save_class/<int:teacher_id>', methods=['POST'])
+def save_class(teacher_id):
+    if not Class.class_validator(request.form):
+        return redirect('/success')
+    data = {
+        'class_name': request.form['class_name'],
+        'location': request.form['location'],
+        'start_date': request.form['start_date'],
+        'description': request.form['description'],
+        'teacher_id': teacher_id
+    }
+    print(data)
+    Class.save(data)
+    return redirect('/success')

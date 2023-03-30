@@ -3,7 +3,11 @@
     padding: 0;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+html{
+    height: 100%;
+}
 body{
+    height: 100%;
     background-image: url(../images/supplies.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -41,14 +45,13 @@ body{
     text-decoration: none;
     margin:auto;
 }
-.login-reg-form button{
+.login-reg-form button, .blue-btn{
     width: 100%;
     background-color: #6e8fbe;
     color: white;
 }
-.login-reg-form button:hover, .login-reg-form button:focus{
+.login-reg-form button:hover, .login-reg-form button:focus, .blue-btn:hover, .blue-btn:focus{
     box-shadow: 0px 0px 5px 2px #6e8fbe;
-    /* background-color: rgb(211, 211, 211, 0.5); */
     background-color: white;
     color: black;
 }
@@ -59,8 +62,17 @@ body{
 }
 .top-nav{
     position: fixed;
-    right: 20px;
+    display: flex;
+    gap: 15px;
+    right: 0;
     top: 20px;
+    background-color: #6e8fbe;
+    border-radius: 10px 0 0 10px;
+    padding: 20px;
+}
+.back-to-dash-btn:hover, .back-to-dash-btn:focus, .enroll-btn:hover, .enroll-btn:focus{
+    background-color: seagreen;
+    color: white;
 }
 .logout-btn:hover, .logout-btn:focus{
     background-color: red;
@@ -102,5 +114,109 @@ body{
     padding: 0 15px;
 }
 .my-modal{
+    display: flex;
+    z-index: 10;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    max-width: 600px;
+    height: fit-content;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 40px 40px;
+    background-color: white;
+    border-radius: 10px;
+    border: 3px solid #be6e8f;
+}
+.my-modal.active{
+    transition: 500ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+.my-modal label{
+    margin: 10px 0 0 5px;
+}
+.close-btn{
     font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0 20px;
+    text-shadow: 0 1px 0 #fff;
+    line-height: 1;
+    opacity: .5;
+}
+#overlay{
+    position: fixed;
+    opacity: 0;
+    transition: 900ms ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+#overlay.active{
+    pointer-events: all;
+    opacity: 1;
+}
+.enrollment{
+    margin-top: -8px;
+    padding: 20px 40px;
+    height: 100%;
+    background-color: white;
+    border-left: 2px solid #be6e8f;
+    border-right: 2px solid #be6e8f;
+}
+.class_name{
+    font-size: 2.3rem;
+    font-weight: bold;
+}
+.sub-info{
+    display: flex;
+    justify-content: space-between;
+}
+.one_class{
+    position: relative;
+}
+.enroll-btn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.indent{
+    margin-left: 10px;
+    width: 950px;
+    min-width: 350px;
+}
+.empty-msg{
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: cursive;
+}
+.student-view-grid{
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+
+}
+.grid-col-span-2{
+    grid-column: 1/ span 2;
+}
+.grade{
+    width: fit-content;
+    text-align: center;
+}
+.letter-grade{
+    border: 2px dashed black;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5rem;
+    padding-top: 12px;
 }
