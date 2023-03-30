@@ -21,11 +21,11 @@
         </form>
     </div>
     <h1 class="top">Enrollment</h1>
-    <!-- {% if not all_classes%}
+    {% if not all_classes %}
         <h2 class="empty-msg">There are currently no available classes, check back later..</h2>
-    {% endif %} -->
+    {% endif %}
     <div class="container enrollment">
-        {% for class in all_classes%}
+        {% for class in all_classes %}
             <div class="one_class">
                 <h2 class="class_name">{{class.class_name}}</h2>
                 <div class="sub-info">
@@ -35,7 +35,7 @@
                 <p>Description:</p>
                 <p class="indent">{{class.description}}</p>
                 <form action="/enroll_in_class/{{class.id}}" method="post">
-                    <button class="btn enroll-btn" type="submit">Enroll</button>
+                    <button class="btn enroll-btn" type="submit">Enroll Now</button>
                 </form>
                 <hr>
             </div>

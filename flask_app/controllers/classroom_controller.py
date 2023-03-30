@@ -27,13 +27,13 @@ def delete_class(id):
 
 
 #NOT USING THIS YET
-@app.route('/show_one_class/<int:class_id>')
-def get_one_class_teacher(class_id):
-    data = {
-        'class_id': class_id
-    }
-    one_class = User.show_student_with_classes(data)
-    return render_template('teacher_view_class.html', class_info = one_class)
+# @app.route('/show_one_class/<int:class_id>')
+# def get_one_class_teacher(class_id):
+#     data = {
+#         'class_id': class_id
+#     }
+#     one_class = User.show_student_with_classes(data)
+#     return render_template('teacher_view_class.html', class_info = one_class)
 
 @app.route('/save_class/<int:teacher_id>', methods=['POST'])
 def save_class(teacher_id):

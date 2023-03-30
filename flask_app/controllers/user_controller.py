@@ -39,7 +39,10 @@ def register(role):
     if role == 'student':
         temp_dict['role'] = 'student'
     if not User.user_validator(temp_dict):
-        return redirect('/')
+        if role == 'teacher':
+            return redirect('/teacher_registration_page')
+        if role == 'student':
+            return redirect('/student_registration_page')
     if User.get_user_by_email(request.form) != False:
         flash('This email address is already in use!')
         if role == 'teacher':

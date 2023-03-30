@@ -37,21 +37,15 @@
                 <h2 class="text-blue">My classes</h2>
             </div>
             <div class="content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Class Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- FOR LOOP RETURNING MULTIPLE ROWS OF SAME DATA -->
-                        {% for class in teacher_classes.classes %}
-                        <tr>
-                            <td><a href="/show_one_class/{{class.id}}">{{class.class_name}} </a> | <a href="/delete_class/{{class.id}}">Delete Class</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                {% if not all_classes %}
+                        <p class="text-muted">You have no classes</p>
+                {% endif %}
+                {% if all_classes %}
+                    {% for class in teacher_classes.classes %}
+                        <p><a href="/show_one_class/{{class.id}}">{{class.class_name}} </a> | <a href="/delete_class/{{class.id}}">Delete Class</a></p>
+                        <hr>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="tile grid-row-span-2">
@@ -63,17 +57,11 @@
                 {% if not all_classes %}
                     <p class="text-muted">There are no other class, create one?</p>
                 {% endif %}
-                {% if all_classes%}
-                    <table class="table">
-                        <tbody>
-                            <!-- add table data here -->
-                            {% for class in all_classes%}
-                                <tr>
-                                    <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                {% if all_classes %}
+                    {% for class in all_classes%}
+                            <p><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></p>
+                            <hr>
+                    {% endfor %}
                 {% endif %}
             </div>
         </div>

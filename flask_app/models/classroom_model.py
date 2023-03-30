@@ -29,10 +29,23 @@ class Class:
 
     @classmethod
     def get_one_class(cls, data):
-        query = 'SELECT * FROM classes WHERE id=%(class_id)s'
-        result = connectToMySQL(db).query_db(query, data)
-        print(result)
-        return cls(result[0])
+        query = 'SELECT * FROM classes JOIN users on classes.teacher_id = users.id WHERE classes.id = %(class_id)s'
+        results = connectToMySQL(db).query_db(query, data)
+        one_class = cls(results[0])
+        for items in results[0]:
+            print(items)
+        for row_in_db in results:
+            teacher_data = {
+                'id': row_in_db['users.id'],
+                "first_name":  row_in_db['first_name'],
+                "last_name": row_in_db['last_name'],
+                "current_grade": row_in_db['current_grade'],
+                "role": row_in_db['role'],
+                'email': row_in_db['email'],
+                'password': row_in_db['password'],
+            }
+            one_class.teacher = user_model.User(teacher_data)
+        return one_class
 
     @classmethod
     def get_all_classes(cls):
@@ -50,7 +63,7 @@ class Class:
         if len(class_data['class_name']) <= 0 or len(class_data['location']) <= 0 or len(class_data['start_date']) <= 0 or len(class_data['description']) <= 0:
             flash('All fields are required!')
             is_valid = False
-        if len(class_data['class_name']) <= 2:
+        if len(class_data['class_name']) <= 1:
             flash("The class name must be at least 2 characters long.")
             is_valid = False
         if len(class_data['location']) <= 2:
@@ -65,25 +78,25 @@ class Class:
         return is_valid
 
 
-# # RETURNING FALSE
-    @classmethod
-    def get_teacher_classes(cls, data):
-        query = 'SELECT * FROM classes LEFT JOIN users on classes.teacher_id = users.id WHERE users.id=%(teacher_id)s'
-        result = connectToMySQL(db).query_db(query, data)
-        print(result)
-        one_class = cls(result[0])
-        for row in result:
-            teacher_data = {
-                'id':row['users.id'],
-                'first_name':row['first_name'],
-                'last_name': row['last_name'],
-                'current_grade': row['current_grade'],
-                'role': row['role'],
-                'email': row['email'],
-                'password': row['password']
-            }
-        one_class.teacher = user_model.User(teacher_data)
-        return one_class
+# RETURNING FALSE
+    # @classmethod
+    # def get_teacher_classes(cls, data):
+    #     query = 'SELECT * FROM classes LEFT JOIN users on classes.teacher_id = users.id WHERE users.id=%(teacher_id)s'
+    #     result = connectToMySQL(db).query_db(query, data)
+    #     print(result)
+    #     one_class = cls(result[0])
+    #     for row in result:
+    #         teacher_data = {
+    #             'id':row['users.id'],
+    #             'first_name':row['first_name'],
+    #             'last_name': row['last_name'],
+    #             'current_grade': row['current_grade'],
+    #             'role': row['role'],
+    #             'email': row['email'],
+    #             'password': row['password']
+    #         }
+    #     one_class.teacher = user_model.User(teacher_data)
+    #     return one_class
 
     @staticmethod
     def class_validator(class_data):

@@ -41,31 +41,9 @@
                 Praesentium, itaque at aut nobis voluptatibus assumenda in quae vero quisquam libero dignissimos earum voluptatum debitis! Nam velit tenetur mollitia, quasi eligendi officia. Esse culpa eum voluptatibus facilis cumque aspernatur!
                 Nostrum, maxime? Quod enim iste unde, explicabo ea fuga labore tenetur, aliquid voluptate magnam porro. Voluptatem omnis quisquam est nemo reprehenderit magni, nesciunt quasi impedit non enim voluptatibus, provident illo. </p>
             </div>
-            <div class="posts">
-                <h2 class="class_name">Posts</h2>
-                <p>Date posted: mm/dd/yyy</p>
-                <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum sequi cum quasi pariatur nulla nesciunt? Dolorum pariatur soluta nesciunt, sed placeat at reprehenderit ipsum quas maxime hic aliquam similique nam.
-                Illum, molestias aliquam suscipit hic fugit, velit alias harum pariatur, tenetur earum recusandae veniam maiores cupiditate nulla. Quidem eaque enim amet. Similique illum nesciunt earum libero quibusdam hic unde in? </p>
-            </div>
         </div>
         <div class="right-main">
-            <!-- FOR LOOP NOT POPULATING ANY DATA -->
-            {% for info in teacher_classes.users%}
-            <p>Teacher: {{info.last_name}}</p>
-            <table>
-                <thead>
-                    <th>Roster</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>(DATA HERE)</td>
-                    </tr>
-                    <tr>
-                        <td>(DATA HERE)</td>
-                    </tr>
-                </tbody>
-            </table>
-            {% endfor %}
+            <p>Teacher: {{class_info.first_name}}</p>
         </div>
     </div>
 </body>

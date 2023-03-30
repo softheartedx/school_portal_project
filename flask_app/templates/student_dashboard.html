@@ -36,20 +36,18 @@
                 </form>
             </div>
             <div class="content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Class Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                
+                {% if one_student.classes[0].class_name == None %}
+                    <p class="text-muted font-italic">You're not in any classes, enroll now.</p>
+                {% endif %}
+                {% if one_student.classes[0].class_name != None %}
                         {% for class in one_student.classes%}
-                            <tr>
-                                <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
-                            </tr>
+                                <p><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></p>
+                                <hr>
                         {% endfor %}
                     </tbody>
                 </table>
+                {% endif %}
             </div>
         </div>
     </div>
