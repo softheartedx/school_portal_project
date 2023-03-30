@@ -5,55 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css'
+        integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <link rel="stylesheet" href="../static/style/styles.css">
     <title>Class Description</title>
 </head>
 
 <body>
-    <div id="container">
-        <div id="top-bar">
-            <h1>{{class_info.class_name}}hello</h1>
-            <a href="/success">Back to dashboard</a>
-            <button> <a href="/clear_session">Logout</a> </button>
-            <hr>
-        </div>
-        <div id="left-main">
-            <div class="grade">
-                <div></div>
-                <p>Grade</p>
-            </div>
-            <div class="description">
-            <h2>Description</h2>
-            <p>{{class_info.description}}</p>
-            <p>Location | start date: mm/dd/yyy</p>
-            <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis sunt quisquam, exercitationem laboriosam beatae sapiente molestias sed enim nobis blanditiis ullam aspernatur. Mollitia dolorem culpa quos sequi rerum, corporis obcaecati!
-            Beatae obcaecati asperiores unde quos debitis omnis rerum quaerat deserunt quia, vel enim, culpa perferendis ex aspernatur, repellat dignissimos eaque? Esse id aperiam ad voluptas obcaecati numquam, fuga sit nostrum.
-            Cupiditate, deserunt corrupti esse, facere nesciunt impedit commodi alias sequi nam debitis est earum dolorum voluptate aliquam quod placeat accusantium voluptatibus repellendus deleniti porro voluptas fuga maiores? Repellat, quos voluptate.
-            Praesentium, itaque at aut nobis voluptatibus assumenda in quae vero quisquam libero dignissimos earum voluptatum debitis! Nam velit tenetur mollitia, quasi eligendi officia. Esse culpa eum voluptatibus facilis cumque aspernatur!
-            Nostrum, maxime? Quod enim iste unde, explicabo ea fuga labore tenetur, aliquid voluptate magnam porro. Voluptatem omnis quisquam est nemo reprehenderit magni, nesciunt quasi impedit non enim voluptatibus, provident illo. </p>
-        </div>
-        <div class="posts">
-            <h2>Posts</h2>
-            <p>Date posted: mm/dd/yyy</p>
-            <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum sequi cum quasi pariatur nulla nesciunt? Dolorum pariatur soluta nesciunt, sed placeat at reprehenderit ipsum quas maxime hic aliquam similique nam.
-            Illum, molestias aliquam suscipit hic fugit, velit alias harum pariatur, tenetur earum recusandae veniam maiores cupiditate nulla. Quidem eaque enim amet. Similique illum nesciunt earum libero quibusdam hic unde in? </p>
-        </div>
+    <form action="/clear_session">
+        <button class="btn top-nav logout-btn">Log out</button>
+    </form>
+    <h1 class="top">Class Details</h1>
+    <div class="container dashboard-grid">
     </div>
-        <div id="right-main">
-            <p>Teacher: (DATA HERE)</p>
-            <table>
-                <thead>
-                    <th>Roster</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>(DATA HERE)</td>
-                    </tr>
-                    <tr>
-                        <td>(DATA HERE)</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="title">
+        <div class="title-header">
+            <h2 class="text-blue">{{class_info.class_name}}</h2>
+        </div>
+        <div class="content">
+            <p>Location: {{class_info.location}}</p>
+            <p>Start Date: {{class_info.start_date}}</p>
+            <p>Description: {{class_info.description}}</p>
+            <a href="/success">Back to dashboard</a>
         </div>
     </div>
 </body>

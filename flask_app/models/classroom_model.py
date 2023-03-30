@@ -33,8 +33,12 @@ class Class:
         print(result)
         return cls(result[0])
 
-
     @classmethod
     def get_all_classes(cls):
         query = 'SELECT * FROM classes'
+        return connectToMySQL(db).query_db(query)
+
+    @classmethod
+    def get_teacher_classes(cls):
+        query = 'SELECT * FROM classes JOIN users on classes.teacher_id = users.id WHERE users.id=%(teacher_id)s'
         return connectToMySQL(db).query_db(query)

@@ -38,15 +38,12 @@
                     <thead>
                         <tr>
                             <th>Class Name</th>
-                            <th>Grade</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- add table data here -->
                         {% for class in one_student.classes%}
                             <tr>
                                 <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
-                                <td>{{class.grade}}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
