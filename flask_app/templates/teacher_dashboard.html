@@ -37,9 +37,20 @@
                 <h2 class="text-blue">My classes</h2>
             </div>
             <div class="content">
-            {% for class in one_student.classes %}
-                <p><a href="">{{class.class_name}}</a></p><!-- have links to classes here -->
-            {% endfor %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for class in one_student.classes%}
+                        <tr>
+                            <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="tile grid-row-span-2">
@@ -57,7 +68,7 @@
                             <!-- add table data here -->
                             {% for class in all_classes%}
                             <tr>
-                                    <td><a href="">{{class.class_name}}</a></td>
+                                    <td><a href="/show_one_class/{{class.id}}">{{class.class_name}}</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

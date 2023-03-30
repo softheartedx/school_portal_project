@@ -102,7 +102,7 @@ def edit_profile(student_id):
 
 
 @app.route('/edit_student_profile/<int:student_id>', methods=['POST'])
-def update_profile(student_id):
+def update_profile1(student_id):
     if not User.update_user_validator(request.form):
         return redirect(f'/show_student_profile/{student_id}')
     User.update_student(request.form, student_id)
