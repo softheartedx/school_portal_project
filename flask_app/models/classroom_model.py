@@ -77,27 +77,6 @@ class Class:
             is_valid = False
         return is_valid
 
-
-# RETURNING FALSE
-    # @classmethod
-    # def get_teacher_classes(cls, data):
-    #     query = 'SELECT * FROM classes LEFT JOIN users on classes.teacher_id = users.id WHERE users.id=%(teacher_id)s'
-    #     result = connectToMySQL(db).query_db(query, data)
-    #     print(result)
-    #     one_class = cls(result[0])
-    #     for row in result:
-    #         teacher_data = {
-    #             'id':row['users.id'],
-    #             'first_name':row['first_name'],
-    #             'last_name': row['last_name'],
-    #             'current_grade': row['current_grade'],
-    #             'role': row['role'],
-    #             'email': row['email'],
-    #             'password': row['password']
-    #         }
-    #     one_class.teacher = user_model.User(teacher_data)
-    #     return one_class
-
     @staticmethod
     def class_validator(class_data):
         is_valid = True
